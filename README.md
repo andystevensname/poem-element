@@ -4,3 +4,5 @@
 
 - `line-numbers`: Provides line numbers every 5th line.
 - `wrap-lines`: If the poem contains lines longer than the width of the containing box they will wrap.
+
+![Preview of poem-element](https://github.com/andystevensname/poem-element/raw/master/preview.png)

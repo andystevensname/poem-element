@@ -1,0 +1,99 @@
+<link rel="import" href="../polymer/polymer-element.html">
+
+<dom-module id="poem-element">
+  <template>
+    <style>
+      :host {
+        margin: 0 auto;
+        font-family: "Georgia", "Garamond", "Times New Roman", "Times", serif;
+        overflow-x: var(--poem-element-overflow-x, auto); /* auto or initial */
+        white-space: var(--poem-element-whitespace, pre); /* pre-wrap or pre */
+        position: relative;
+
+        display: block;
+      }
+
+      ::slotted(.line) {
+        display: inline-block; /* force container to grow to pre content */
+        counter-increment: line;
+        position: relative;
+        width: calc(100% - 30px);
+        max-width: calc(100% - 30px);
+      }
+
+      ::slotted(.wrapped) {
+        white-space: pre-wrap;
+        text-indent: calc(var(--poem-element-line-dedent, 1.5em) * -1);
+        padding-left: var(--poem-element-line-dedent, 1.5em);
+        box-sizing: border-box;
+      }
+
+      ::slotted(.numbered)::after {
+        font-style: italic;
+        font-size: 12px;
+        width: 30px;
+        text-align: right;
+        position: absolute;
+        top: 0;
+        right: -30px;
+        -webkit-user-select: none;
+      }
+
+      ::slotted(.numbered:nth-child(5n+0))::after {
+        content: counter(line);
+      }
+    </style>
+    <slot id="poemBody"></slot>
+  </template>
+
+  <script>
+    /**
+     * `poem-element`
+     * A semantic poetry element.
+     *
+     * @customElement
+     * @polymer
+     * @demo demo/index.html
+     */
+     class PoemElement extends Polymer.Element {
+      static get is() { return 'poem-element'; }
+      static get properties() {
+        return {
+          wrapLines: {
+            type: Boolean,
+            value: false,
+            //readOnly: true,
+            //reflectToAttribute: true
+          },
+          lineNumbers: {
+            type: Boolean,
+            value: false,
+          },
+          lineNumberMultiple: {
+            type: Number,
+            value: 5
+          }
+        }
+      }
+
+      connectedCallback() {
+        super.connectedCallback();
+        //text = text.replace(/^(\s)+/g, ''); // strip leading linebreaks caused by setting text below opening tag
+        var text = this.textContent;
+        text = text.split(/(?:\r\n|\r|\n)/gi); // split lines at end of line (\n)
+        var numLines = text.length;
+        var string = "";
+        for (var i = 0; i < numLines; i++) {
+          if (text[i].match(/^(\r|\n)+/g) || text[i] == "") { // if line only contains line breaks or errant spaces, preserve line break with newline (pre or pre-wrap)
+            string += '\n';
+          } else {
+            string += '<span class="line' + (this.wrapLines?' wrapped':'') + (this.lineNumbers?' numbered':'') + '">' + text[i] + '</span>\n';
+          }
+        }
+
+        this.innerHTML = string;
+      }
+    }
+    window.customElements.define(PoemElement.is, PoemElement);
+  </script>
+</dom-module>

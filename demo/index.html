@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
+
+    <title>poem-element demo</title>
+
+    <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
+
+    <link rel="import" href="../../iron-demo-helpers/demo-pages-shared-styles.html">
+    <link rel="import" href="../../iron-demo-helpers/demo-snippet.html">
+    <link rel="import" href="../poem-element.html">
+
+    <custom-style>
+      <style is="custom-style" include="demo-pages-shared-styles">
+      </style>
+    </custom-style>
+  </head>
+  <body>
+    <div class="vertical-section-container centered">
+      <h3>Basic poem-element demo</h3>
+      <demo-snippet>
+        <template>
+          <poem-element line-numbers>
+I CELEBRATE myself, and sing myself,
+And what I assume you shall assume,
+For every atom belonging to me as good belongs to you.
+
+I loafe and invite my soul,
+I lean and loafe at my ease observing a spear of summer grass.
+
+My tongue, every atom of my blood, form'd from this soil, 
+this air,
+Born here of parents born here from parents the same, and their 
+parents the same,
+I, now thirty-seven years old in perfect health begin,
+Hoping to cease not till death.
+
+Creeds and schools in abeyance,
+Retiring back a while sufficed at what they are, but never forgotten,
+I harbor for good or bad, I permit to speak at every hazard,
+Nature without check with original energy.
+</poem-element>
+        </template>
+      </demo-snippet>
+
+    <h3>Basic poem-element with wrapped lines demo</h3>
+      <demo-snippet>
+        <template>
+<poem-element line-numbers wrap-lines>
+This is a very long line with no apparent need to stop so it just keeps going and going and going and going, and so it will wrap.
+This is a short line.
+
+This line begins a new stanza.
+This is another short line.
+This is a very long line with no apparent need to stop so it just keeps going and going and going and going, and so it will wrap.
+</poem-element>
+        </template>
+      </demo-snippet>
+    </div>
+  </body>
+</html>

@@ -1,21 +1,6 @@
-# \<poem-element\>
+# poem-element
 
-A semantic poetry element.
+`<poem-element>` is a semantic poetry element for the web. It has two properties:
 
-## Install the Polymer-CLI
-
-First, make sure you have the [Polymer CLI](https://www.npmjs.com/package/polymer-cli) installed. Then run `polymer serve` to serve your element locally.
-
-## Viewing Your Element
-
-```
-$ polymer serve
-```
-
-## Running Tests
-
-```
-$ polymer test
-```
-
-Your application is already set up to be tested via [web-component-tester](https://github.com/Polymer/web-component-tester). Run `polymer test` to run your application's test suite locally.
+- `line-numbers`: Provides line numbers every 5th line.
+- `wrap-lines`: If the poem contains lines longer than the width of the containing box they will wrap.

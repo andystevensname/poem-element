@@ -1,0 +1,254 @@
+/**
+ * Parse poem-element attributes into a normalized config object.
+ * @param {object} attrs - Raw attributes
+ * @param {string|null} attrs.numbers - null if absent, '' if boolean, or a number string
+ * @param {string|null} attrs.wrap - null if absent, '' if boolean, or 'indent'|'indent-arrow'
+ * @param {string|null} attrs['numbers-layout'] - 'list'|'grid' or null
+ * @param {string|null} attrs['numbers-position'] - 'inside'|'outside' or null
+ * @param {string|null} attrs['aria-label'] - custom label or null
+ * @returns {object}
+ */
+export function parseAttributes(attrs) {
+  const hasNumbers = attrs.numbers != null;
+  let numberInterval = 5;
+  if (hasNumbers) {
+    const val = attrs.numbers;
+    if (val !== '' && !isNaN(Number(val)) && Number(val) > 0) {
+      numberInterval = Number(val);
+    }
+  }
+  const hasWrap = attrs.wrap != null;
+  const numbersLayout = attrs['numbers-layout'] || 'grid';
+  const useListNumbers = hasNumbers && hasWrap && numbersLayout === 'list';
+  const useGridNumbers = hasNumbers && !useListNumbers;
+  const useGridSplit = useGridNumbers && !hasWrap;
+  const numbersOutside = attrs['numbers-position'] === 'outside';
+  const ariaLabel = attrs['aria-label'] || 'poem';
+
+  return {
+    hasNumbers,
+    numberInterval,
+    hasWrap,
+    numbersLayout,
+    useListNumbers,
+    useGridNumbers,
+    useGridSplit,
+    numbersOutside,
+    ariaLabel,
+  };
+}
+
+/**
+ * Process raw poem text into trimmed lines array.
+ * @param {string} raw
+ * @returns {string[]}
+ */
+export function parseLines(raw) {
+  const lines = raw.split('\n');
+  const first = lines.findIndex(l => l.trim() !== '');
+  if (first === -1) return [];
+  let last = lines.length - 1;
+  while (last > first && lines[last].trim() === '') last--;
+  return lines.slice(first, last + 1);
+}
+
+/**
+ * Transform a single line's text content based on config.
+ * @param {string} line
+ * @param {object} config - from parseAttributes
+ * @returns {string}
+ */
+export function transformLineText(line, config) {
+  if (!config.hasWrap && !config.hasNumbers) {
+    let leading = '';
+    const match = line.match(/^\s+/);
+    if (match) {
+      leading = match[0].replace(/ /g, '\u00A0').replace(/\t/g, '\u00A0\u00A0\u00A0\u00A0');
+    }
+    return leading + line.trimStart();
+  }
+  return line === '' ? '\u00A0' : line.trimEnd();
+}
+
+/**
+ * Format a line number for display.
+ * @param {number} index - 0-based line index
+ * @param {number} interval - numbering interval
+ * @returns {string} The formatted number (e.g. "5.") or NBSP for non-numbered lines
+ */
+export function formatLineNumber(index, interval) {
+  if (interval > 0 && ((index + 1) % interval === 0)) {
+    return String(index + 1) + '.';
+  }
+  return '\u00A0';
+}
+
+/**
+ * Static CSS shared by all poem-element instances (interval-independent).
+ * @type {string}
+ */
+export const STATIC_CSS = `
+      :host {
+        display: block;
+        width: 100%;
+        box-sizing: border-box;
+        --poem-num-col: 40px;
+        --poem-num-gap: 0.5rem;
+        --poem-num-gutter: calc(var(--poem-num-col) + var(--poem-num-gap));
+        --poem-line-number-color: inherit;
+        --poem-line-number-font: inherit;
+        --poem-line-number-font-size: 1em;
+        --poem-line-number-font-weight: normal;
+        --poem-text-indent: 2em;
+      }
+      [part="block"] {
+        margin: 0;
+        padding: 0;
+        font-family: inherit;
+        font-size: inherit;
+        line-height: 1.5;
+        width: 100%;
+        box-sizing: border-box;
+        contain: layout style;
+        overflow-x: auto;
+      }
+      [part="block"]:focus-visible {
+        outline: 2px solid Highlight;
+        outline-offset: 2px;
+      }
+      [part="line"] {
+        display: list-item;
+        list-style-type: none;
+      }
+      /* Wrap */
+      :host([wrap]) [part="block"] {
+        white-space: pre-wrap;
+        overflow-x: visible;
+        word-break: break-word;
+        overflow-wrap: anywhere;
+      }
+      /* Wrap + indent: hanging indent */
+      :host([wrap="indent"]) [part="line"],
+      :host([wrap="indent-arrow"]) [part="line"] {
+        text-indent: calc(-1 * var(--poem-text-indent, 2em));
+        margin-left: var(--poem-text-indent, 2em);
+      }
+      /* Wrap + indent-arrow: arrow pseudo-element */
+      :host([wrap="indent-arrow"]) [part="line"] {
+        position: relative;
+      }
+      :host([wrap="indent-arrow"]) [part="line"]::after {
+        content: "\\21AA";
+        position: absolute;
+        left: calc(var(--poem-text-indent, 2em) / 2);
+        top: 2.5em;
+        color: #888;
+        font-size: 0.8em;
+        line-height: 1;
+        pointer-events: none;
+      }
+      /* Numbers (list layout): inside positioning — pad block so markers sit within content flow */
+      :host([numbers][numbers-layout="list"]:not([numbers-position="outside"])) [part="block"] {
+        padding-left: var(--poem-num-gutter);
+      }
+      /* Numbers (list layout) + indent: override margin with padding for ::marker space */
+      :host([numbers][numbers-layout="list"][wrap="indent"]) [part="line"],
+      :host([numbers][numbers-layout="list"][wrap="indent-arrow"]) [part="line"] {
+        margin-left: 0;
+        padding-left: var(--poem-text-indent, 2em);
+        text-indent: calc(-1 * var(--poem-text-indent, 2em));
+      }
+      /* Numbers (list layout) + indent-arrow: arrow offset for marker gutter */
+      :host([numbers][numbers-layout="list"][wrap="indent-arrow"]) [part="line"]::after {
+        left: calc(var(--poem-num-gutter) + var(--poem-num-gap) + (var(--poem-text-indent, 2em) / 2) - 2em);
+      }
+      /* Grid numbers + wrap (interleaved grid, default) */
+      :host([numbers][wrap]:not([numbers-layout="list"])) [part="block"] {
+        display: grid;
+        grid-template-columns: var(--poem-num-col) 1fr;
+        column-gap: var(--poem-num-gap);
+      }
+      :host([numbers][wrap]:not([numbers-layout="list"])) [part="line"] {
+        display: block;
+        min-width: 0;
+      }
+      /* Grid numbers + wrap: outside positioning */
+      :host([numbers][numbers-position="outside"][wrap]:not([numbers-layout="list"])) [part="block"] {
+        margin-left: calc(-1 * var(--poem-num-gutter));
+        width: calc(100% + var(--poem-num-gutter));
+      }
+      /* Grid number layout: no-wrap (two-column with separate scroll) */
+      .poem-grid-outer {
+        display: flex;
+        align-items: flex-start;
+      }
+      .poem-grid-outer.poem-numbers-outside {
+        margin-left: calc(-1 * var(--poem-num-gutter));
+        width: calc(100% + var(--poem-num-gutter));
+      }
+      [part="line-numbers"] {
+        flex-shrink: 0;
+        width: var(--poem-num-col);
+        margin: 0;
+        padding: 0;
+        margin-right: var(--poem-num-gap);
+        white-space: pre;
+        line-height: inherit;
+      }
+      [part="line-numbers"] span {
+        display: block;
+      }
+      .poem-grid-outer [part="block"] {
+        flex: 1;
+        min-width: 0;
+      }
+      /* Shared number styles (grid layout DOM elements) */
+      [part="line-number"],
+      [part="line-numbers"] {
+        text-align: right;
+        color: var(--poem-line-number-color, inherit);
+        font-family: var(--poem-line-number-font, inherit);
+        font-size: var(--poem-line-number-font-size, 1em);
+        font-weight: var(--poem-line-number-font-weight, normal);
+        font-variant-numeric: lining-nums;
+        user-select: none;
+        -webkit-user-select: none;
+        pointer-events: none;
+      }
+      /* Print: force wrap and remove overflow clipping */
+      @media print {
+        [part="block"] {
+          white-space: pre-wrap;
+          overflow-x: visible;
+          contain: none;
+        }
+      }`;
+
+/**
+ * Generate the interval-dependent CSS (nth-child rules for line numbers).
+ * @param {number} numberInterval
+ * @returns {string}
+ */
+export function generateDynamicCSS(numberInterval) {
+  return `
+      /* List layout: ::marker on nth lines */
+      :host([numbers][numbers-layout="list"][wrap]) [part="line"]:nth-child(${numberInterval}n) {
+        list-style-type: decimal;
+      }
+      :host([numbers][numbers-layout="list"][wrap]) [part="line"]:nth-child(${numberInterval}n)::marker {
+        color: var(--poem-line-number-color, inherit);
+        font-family: var(--poem-line-number-font, inherit);
+        font-size: var(--poem-line-number-font-size, 1em);
+        font-weight: var(--poem-line-number-font-weight, normal);
+        font-variant-numeric: tabular-nums lining-nums;
+      }`;
+}
+
+/**
+ * Generate the full CSS string for the shadow DOM.
+ * @param {number} numberInterval
+ * @returns {string}
+ */
+export function generateCSS(numberInterval) {
+  return STATIC_CSS + generateDynamicCSS(numberInterval);
+}

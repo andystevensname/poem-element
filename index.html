@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Presenting Poetry</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: Georgia, 'Times New Roman', serif;
+        color: #333;
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 2rem;
+      }
+
+      poem-element:not(:defined) {
+        visibility: hidden;
+      }
+
+      poem-element {
+        margin-bottom: 2rem;
+        width: 15rem;
+      }
+
+      h2 {
+        margin-top: 2rem;
+        margin-bottom: 0.5rem;
+      }
+
+      h3 {
+        margin-bottom: 0.25rem;
+        font-size: 0.9em;
+        color: #666;
+      }
+    </style>
+  </head>
+  <body>
+<h1>&lt;poem-element&gt; Examples</h1>
+
+<h2>Example #1: Default (no wrap, no numbers)</h2>
+<poem-element>
+Buffalo Bill 's
+defunct
+               who used to
+               ride a watersmooth-silver
+                                                              stallion
+and break onetwothreefourfive pigeonsjustlikethat
+                                                                                              Jesus
+he was a handsome man
+                                            and what i want to know is
+how do you like your blueeyed boy
+Mister Death
+</poem-element>
+
+<h2>Example #2: Standard wrap</h2>
+<poem-element wrap>
+Shall I compare thee to a summer's day?
+Thou art more lovely and more temperate:
+Rough winds do shake the darling buds of May,
+And summer's lease hath all too short a date;
+Sometime too hot the eye of heaven shines,
+And often is his gold complexion dimm'd;
+And every fair from fair sometime declines,
+By chance or nature's changing course untrimm'd;
+But thy eternal summer shall not fade,
+Nor lose possession of that fair thou ow'st;
+Nor shall death brag thou wander'st in his shade,
+When in eternal lines to time thou grow'st:
+  So long as men can breathe or eyes can see,
+  So long lives this, and this gives life to thee.
+</poem-element>
+
+<h2>Example #3: Wrap with indent</h2>
+<poem-element wrap="indent">
+Shall I compare thee to a summer's day?
+Thou art more lovely and more temperate:
+Rough winds do shake the darling buds of May,
+And summer's lease hath all too short a date;
+Sometime too hot the eye of heaven shines,
+And often is his gold complexion dimm'd;
+And every fair from fair sometime declines,
+By chance or nature's changing course untrimm'd;
+But thy eternal summer shall not fade,
+Nor lose possession of that fair thou ow'st;
+Nor shall death brag thou wander'st in his shade,
+When in eternal lines to time thou grow'st:
+  So long as men can breathe or eyes can see,
+  So long lives this, and this gives life to thee.
+</poem-element>
+
+<h2>Example #4: Wrap with indent-arrow</h2>
+<poem-element wrap="indent-arrow">
+Shall I compare thee to a summer's day?
+Thou art more lovely and more temperate:
+Rough winds do shake the darling buds of May,
+And summer's lease hath all too short a date;
+Sometime too hot the eye of heaven shines,
+And often is his gold complexion dimm'd;
+And every fair from fair sometime declines,
+By chance or nature's changing course untrimm'd;
+But thy eternal summer shall not fade,
+Nor lose possession of that fair thou ow'st;
+Nor shall death brag thou wander'st in his shade,
+When in eternal lines to time thou grow'st:
+  So long as men can breathe or eyes can see,
+  So long lives this, and this gives life to thee.
+</poem-element>
+
+<h2>Example #5: Numbers, no wrap</h2>
+<h3>inside (default)</h3>
+<poem-element numbers>
+Shall I compare thee to a summer's day?
+Thou art more lovely and more temperate:
+Rough winds do shake the darling buds of May,
+And summer's lease hath all too short a date;
+Sometime too hot the eye of heaven shines,
+And often is his gold complexion dimm'd;
+And every fair from fair sometime declines,
+By chance or nature's changing course untrimm'd;
+But thy eternal summer shall not fade,
+Nor lose possession of that fair thou ow'st;
+Nor shall death brag thou wander'st in his shade,
+When in eternal lines to time thou grow'st:
+  So long as men can breathe or eyes can see,
+  So long lives this, and this gives life to thee.
+</poem-element>
+
+<h3>outside</h3>
+<poem-element numbers numbers-position="outside">
+Shall I compare thee to a summer's day?
+Thou art more lovely and more temperate:
+Rough winds do shake the darling buds of May,
+And summer's lease hath all too short a date;
+Sometime too hot the eye of heaven shines,
+And often is his gold complexion dimm'd;
+And every fair from fair sometime declines,
+By chance or nature's changing course untrimm'd;
+But thy eternal summer shall not fade,
+Nor lose possession of that fair thou ow'st;
+Nor shall death brag thou wander'st in his shade,
+When in eternal lines to time thou grow'st:
+  So long as men can breathe or eyes can see,
+  So long lives this, and this gives life to thee.
+</poem-element>
+
+<h2>Example #6: Numbers + standard wrap (grid)</h2>
+<h3>inside (default)</h3>
+<poem-element numbers wrap>
+Shall I compare thee to a summer's day?
+Thou art more lovely and more temperate:
+Rough winds do shake the darling buds of May,
+And summer's lease hath all too short a date;
+Sometime too hot the eye of heaven shines,
+And often is his gold complexion dimm'd;
+And every fair from fair sometime declines,
+By chance or nature's changing course untrimm'd;
+But thy eternal summer shall not fade,
+Nor lose possession of that fair thou ow'st;
+Nor shall death brag thou wander'st in his shade,
+When in eternal lines to time thou grow'st:
+  So long as men can breathe or eyes can see,
+  So long lives this, and this gives life to thee.
+</poem-element>
+
+<h3>outside</h3>
+<poem-element numbers numbers-position="outside" wrap>
+Shall I compare thee to a summer's day?
+Thou art more lovely and more temperate:
+Rough winds do shake the darling buds of May,
+And summer's lease hath all too short a date;
+Sometime too hot the eye of heaven shines,
+And often is his gold complexion dimm'd;
+And every fair from fair sometime declines,
+By chance or nature's changing course untrimm'd;
+But thy eternal summer shall not fade,
+Nor lose possession of that fair thou ow'st;
+Nor shall death brag thou wander'st in his shade,
+When in eternal lines to time thou grow'st:
+  So long as men can breathe or eyes can see,
+  So long lives this, and this gives life to thee.
+</poem-element>
+
+<h2>Example #7: Numbers + standard wrap (list)</h2>
+<h3>inside (default)</h3>
+<poem-element numbers numbers-layout="list" wrap>
+Shall I compare thee to a summer's day?
+Thou art more lovely and more temperate:
+Rough winds do shake the darling buds of May,
+And summer's lease hath all too short a date;
+Sometime too hot the eye of heaven shines,
+And often is his gold complexion dimm'd;
+And every fair from fair sometime declines,
+By chance or nature's changing course untrimm'd;
+But thy eternal summer shall not fade,
+Nor lose possession of that fair thou ow'st;
+Nor shall death brag thou wander'st in his shade,
+When in eternal lines to time thou grow'st:
+  So long as men can breathe or eyes can see,
+  So long lives this, and this gives life to thee.
+</poem-element>
+
+<h3>outside</h3>
+<poem-element numbers numbers-layout="list" numbers-position="outside" wrap>
+Shall I compare thee to a summer's day?
+Thou art more lovely and more temperate:
+Rough winds do shake the darling buds of May,
+And summer's lease hath all too short a date;
+Sometime too hot the eye of heaven shines,
+And often is his gold complexion dimm'd;
+And every fair from fair sometime declines,
+By chance or nature's changing course untrimm'd;
+But thy eternal summer shall not fade,
+Nor lose possession of that fair thou ow'st;
+Nor shall death brag thou wander'st in his shade,
+When in eternal lines to time thou grow'st:
+  So long as men can breathe or eyes can see,
+  So long lives this, and this gives life to thee.
+</poem-element>
+
+<h2>Example #8: Numbers + indent wrap (grid)</h2>
+<h3>inside (default)</h3>
+<poem-element numbers wrap="indent">
+Shall I compare thee to a summer's day?
+Thou art more lovely and more temperate:
+Rough winds do shake the darling buds of May,
+And summer's lease hath all too short a date;
+Sometime too hot the eye of heaven shines,
+And often is his gold complexion dimm'd;
+And every fair from fair sometime declines,
+By chance or nature's changing course untrimm'd;
+But thy eternal summer shall not fade,
+Nor lose possession of that fair thou ow'st;
+Nor shall death brag thou wander'st in his shade,
+When in eternal lines to time thou grow'st:
+  So long as men can breathe or eyes can see,
+  So long lives this, and this gives life to thee.
+</poem-element>
+
+<h3>outside</h3>
+<poem-element numbers numbers-position="outside" wrap="indent">
+Shall I compare thee to a summer's day?
+Thou art more lovely and more temperate:
+Rough winds do shake the darling buds of May,
+And summer's lease hath all too short a date;
+Sometime too hot the eye of heaven shines,
+And often is his gold complexion dimm'd;
+And every fair from fair sometime declines,
+By chance or nature's changing course untrimm'd;
+But thy eternal summer shall not fade,
+Nor lose possession of that fair thou ow'st;
+Nor shall death brag thou wander'st in his shade,
+When in eternal lines to time thou grow'st:
+  So long as men can breathe or eyes can see,
+  So long lives this, and this gives life to thee.
+</poem-element>
+
+<h2>Example #9: Numbers + indent wrap (list)</h2>
+<h3>inside (default)</h3>
+<poem-element numbers numbers-layout="list" wrap="indent">
+Shall I compare thee to a summer's day?
+Thou art more lovely and more temperate:
+Rough winds do shake the darling buds of May,
+And summer's lease hath all too short a date;
+Sometime too hot the eye of heaven shines,
+And often is his gold complexion dimm'd;
+And every fair from fair sometime declines,
+By chance or nature's changing course untrimm'd;
+But thy eternal summer shall not fade,
+Nor lose possession of that fair thou ow'st;
+Nor shall death brag thou wander'st in his shade,
+When in eternal lines to time thou grow'st:
+  So long as men can breathe or eyes can see,
+  So long lives this, and this gives life to thee.
+</poem-element>
+
+<h3>outside</h3>
+<poem-element numbers numbers-layout="list" numbers-position="outside" wrap="indent">
+Shall I compare thee to a summer's day?
+Thou art more lovely and more temperate:
+Rough winds do shake the darling buds of May,
+And summer's lease hath all too short a date;
+Sometime too hot the eye of heaven shines,
+And often is his gold complexion dimm'd;
+And every fair from fair sometime declines,
+By chance or nature's changing course untrimm'd;
+But thy eternal summer shall not fade,
+Nor lose possession of that fair thou ow'st;
+Nor shall death brag thou wander'st in his shade,
+When in eternal lines to time thou grow'st:
+  So long as men can breathe or eyes can see,
+  So long lives this, and this gives life to thee.
+</poem-element>
+
+<h2>Example #10: Numbers + indent-arrow wrap (grid)</h2>
+<h3>inside (default)</h3>
+<poem-element numbers wrap="indent-arrow">
+Shall I compare thee to a summer's day?
+Thou art more lovely and more temperate:
+Rough winds do shake the darling buds of May,
+And summer's lease hath all too short a date;
+Sometime too hot the eye of heaven shines,
+And often is his gold complexion dimm'd;
+And every fair from fair sometime declines,
+By chance or nature's changing course untrimm'd;
+But thy eternal summer shall not fade,
+Nor lose possession of that fair thou ow'st;
+Nor shall death brag thou wander'st in his shade,
+When in eternal lines to time thou grow'st:
+  So long as men can breathe or eyes can see,
+  So long lives this, and this gives life to thee.
+</poem-element>
+
+<h3>outside</h3>
+<poem-element numbers numbers-position="outside" wrap="indent-arrow">
+Shall I compare thee to a summer's day?
+Thou art more lovely and more temperate:
+Rough winds do shake the darling buds of May,
+And summer's lease hath all too short a date;
+Sometime too hot the eye of heaven shines,
+And often is his gold complexion dimm'd;
+And every fair from fair sometime declines,
+By chance or nature's changing course untrimm'd;
+But thy eternal summer shall not fade,
+Nor lose possession of that fair thou ow'st;
+Nor shall death brag thou wander'st in his shade,
+When in eternal lines to time thou grow'st:
+  So long as men can breathe or eyes can see,
+  So long lives this, and this gives life to thee.
+</poem-element>
+
+<h2>Example #11: Numbers + indent-arrow wrap (list)</h2>
+<h3>inside (default)</h3>
+<poem-element numbers numbers-layout="list" wrap="indent-arrow">
+Shall I compare thee to a summer's day?
+Thou art more lovely and more temperate:
+Rough winds do shake the darling buds of May,
+And summer's lease hath all too short a date;
+Sometime too hot the eye of heaven shines,
+And often is his gold complexion dimm'd;
+And every fair from fair sometime declines,
+By chance or nature's changing course untrimm'd;
+But thy eternal summer shall not fade,
+Nor lose possession of that fair thou ow'st;
+Nor shall death brag thou wander'st in his shade,
+When in eternal lines to time thou grow'st:
+  So long as men can breathe or eyes can see,
+  So long lives this, and this gives life to thee.
+</poem-element>
+
+<h3>outside</h3>
+<poem-element numbers numbers-layout="list" numbers-position="outside" wrap="indent-arrow">
+Shall I compare thee to a summer's day?
+Thou art more lovely and more temperate:
+Rough winds do shake the darling buds of May,
+And summer's lease hath all too short a date;
+Sometime too hot the eye of heaven shines,
+And often is his gold complexion dimm'd;
+And every fair from fair sometime declines,
+By chance or nature's changing course untrimm'd;
+But thy eternal summer shall not fade,
+Nor lose possession of that fair thou ow'st;
+Nor shall death brag thou wander'st in his shade,
+When in eternal lines to time thou grow'st:
+  So long as men can breathe or eyes can see,
+  So long lives this, and this gives life to thee.
+</poem-element>
+
+<h2>Numbered list for comparison</h2>
+<ol>
+  <li>item item this is a longer line that should make the list container want to scroll</li>
+  <li>item</li>
+  <li>item</li>
+  <li>item</li>
+  <li>item</li>
+  <li>item</li>
+  <li>item</li>
+  <li>item</li>
+  <li>item</li>
+  <li>item</li>
+  <li>item</li>
+  <li>item</li>
+</ol>
+    <script type="module" src="./poem-element.js"></script>
+  </body>
+</html>

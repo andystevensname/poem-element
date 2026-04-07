@@ -54,6 +54,7 @@ export function renderPoemElement(poemText, attrs = {}) {
 
   // Build shadow DOM content
   let shadowHTML = `<style>${css}</style>`;
+  shadowHTML += `<slot name="title"></slot><slot name="author"></slot>`;
 
   const tabindexAttr = config.hasWrap ? '' : ' tabindex="0"';
   let numbersHTML = '';

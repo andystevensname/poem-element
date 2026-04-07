@@ -25,7 +25,12 @@
 
       poem-element {
         margin-bottom: 2rem;
-        width: 15rem;
+        background: lightgrey;
+        padding: 1em;
+      }
+
+      poem-element.force-wrap {
+        width: 20rem;
       }
 
       h2 {
@@ -38,13 +43,43 @@
         font-size: 0.9em;
         color: #666;
       }
+
+      poem-element [slot="title"] {
+        font-weight: bold;
+      }
+
+      poem-element [slot="author"] {
+        font-style: italic;
+      }
     </style>
   </head>
   <body>
 <h1>&lt;poem-element&gt; Examples</h1>
 
-<h2>Example #1: Default (no wrap, no numbers)</h2>
+<h2>Example #1: Title and author</h2>
 <poem-element>
+  <span slot="title">Sonnet 18</span>
+  <span slot="author">William Shakespeare</span>
+Shall I compare thee to a summer's day?
+Thou art more lovely and more temperate:
+Rough winds do shake the darling buds of May,
+And summer's lease hath all too short a date;
+Sometime too hot the eye of heaven shines,
+And often is his gold complexion dimm'd;
+And every fair from fair sometime declines,
+By chance or nature's changing course untrimm'd;
+But thy eternal summer shall not fade,
+Nor lose possession of that fair thou ow'st;
+Nor shall death brag thou wander'st in his shade,
+When in eternal lines to time thou grow'st:
+  So long as men can breathe or eyes can see,
+  So long lives this, and this gives life to thee.
+</poem-element>
+
+<h2>Example #2: Default (no wrap, no numbers)</h2>
+<poem-element class="force-wrap">
+  <span slot="title">Buffalo Bill's</span>
+  <span slot="author">e.e. cummings</span>
 Buffalo Bill 's
 defunct
                who used to
@@ -58,317 +93,353 @@ how do you like your blueeyed boy
 Mister Death
 </poem-element>
 
-<h2>Example #2: Standard wrap</h2>
-<poem-element wrap>
-Shall I compare thee to a summer's day?
-Thou art more lovely and more temperate:
-Rough winds do shake the darling buds of May,
-And summer's lease hath all too short a date;
-Sometime too hot the eye of heaven shines,
-And often is his gold complexion dimm'd;
-And every fair from fair sometime declines,
-By chance or nature's changing course untrimm'd;
-But thy eternal summer shall not fade,
-Nor lose possession of that fair thou ow'st;
-Nor shall death brag thou wander'st in his shade,
-When in eternal lines to time thou grow'st:
-  So long as men can breathe or eyes can see,
-  So long lives this, and this gives life to thee.
+<h2>Example #3: Standard wrap</h2>
+<poem-element wrap class="force-wrap">
+  <span slot="title">Ozymandias</span>
+  <span slot="author">Percy Bysshe Shelley</span>
+I met a traveller from an antique land,
+Who said—"Two vast and trunkless legs of stone
+Stand in the desert. . . . Near them, on the sand,
+Half sunk a shattered visage lies, whose frown,
+And wrinkled lip, and sneer of cold command,
+Tell that its sculptor well those passions read
+Which yet survive, stamped on these lifeless things,
+The hand that mocked them, and the heart that fed;
+And on the pedestal, these words appear:
+My name is Ozymandias, King of Kings;
+Look on my Works, ye Mighty, and despair!
+Nothing beside remains. Round the decay
+Of that colossal Wreck, boundless and bare
+The lone and level sands stretch far away."
 </poem-element>
 
-<h2>Example #3: Wrap with indent</h2>
-<poem-element wrap="indent">
-Shall I compare thee to a summer's day?
-Thou art more lovely and more temperate:
-Rough winds do shake the darling buds of May,
-And summer's lease hath all too short a date;
-Sometime too hot the eye of heaven shines,
-And often is his gold complexion dimm'd;
-And every fair from fair sometime declines,
-By chance or nature's changing course untrimm'd;
-But thy eternal summer shall not fade,
-Nor lose possession of that fair thou ow'st;
-Nor shall death brag thou wander'st in his shade,
-When in eternal lines to time thou grow'st:
-  So long as men can breathe or eyes can see,
-  So long lives this, and this gives life to thee.
+<h2>Example #4: Wrap with indent</h2>
+<poem-element wrap="indent" class="force-wrap">
+  <span slot="title">Sonnet 43</span>
+  <span slot="author">Elizabeth Barrett Browning</span>
+How do I love thee? Let me count the ways.
+I love thee to the depth and breadth and height
+My soul can reach, when feeling out of sight
+For the ends of being and ideal grace.
+I love thee to the level of every day's
+Most quiet need, by sun and candle-light.
+I love thee freely, as men strive for right.
+I love thee purely, as they turn from praise.
+I love thee with the passion put to use
+In my old griefs, and with my childhood's faith.
+I love thee with a love I seemed to lose
+With my lost saints. I love thee with the breath,
+Smiles, tears, of all my life; and, if God choose,
+I shall but love thee better after death.
 </poem-element>
 
-<h2>Example #4: Wrap with indent-arrow</h2>
-<poem-element wrap="indent-arrow">
-Shall I compare thee to a summer's day?
-Thou art more lovely and more temperate:
-Rough winds do shake the darling buds of May,
-And summer's lease hath all too short a date;
-Sometime too hot the eye of heaven shines,
-And often is his gold complexion dimm'd;
-And every fair from fair sometime declines,
-By chance or nature's changing course untrimm'd;
-But thy eternal summer shall not fade,
-Nor lose possession of that fair thou ow'st;
-Nor shall death brag thou wander'st in his shade,
-When in eternal lines to time thou grow'st:
-  So long as men can breathe or eyes can see,
-  So long lives this, and this gives life to thee.
+<h2>Example #5: Wrap with indent-arrow</h2>
+<poem-element wrap="indent-arrow" class="force-wrap">
+  <span slot="title">Death Be Not Proud</span>
+  <span slot="author">John Donne</span>
+Death, be not proud, though some have called thee
+Mighty and dreadful, for thou art not so;
+For those whom thou think'st thou dost overthrow
+Die not, poor Death, nor yet canst thou kill me.
+From rest and sleep, which but thy pictures be,
+Much pleasure; then from thee much more must flow,
+And soonest our best men with thee do go,
+Rest of their bones, and soul's delivery.
+Thou art slave to fate, chance, kings, and desperate men,
+And dost with poison, war, and sickness dwell,
+And poppy or charms can make us sleep as well
+And better than thy stroke; why swell'st thou then?
+One short sleep past, we wake eternally
+And death shall be no more; Death, thou shalt die.
 </poem-element>
 
-<h2>Example #5: Numbers, no wrap</h2>
+<h2>Example #6: Numbers, no wrap</h2>
 <h3>inside (default)</h3>
 <poem-element numbers>
-Shall I compare thee to a summer's day?
-Thou art more lovely and more temperate:
-Rough winds do shake the darling buds of May,
-And summer's lease hath all too short a date;
-Sometime too hot the eye of heaven shines,
-And often is his gold complexion dimm'd;
-And every fair from fair sometime declines,
-By chance or nature's changing course untrimm'd;
-But thy eternal summer shall not fade,
-Nor lose possession of that fair thou ow'st;
-Nor shall death brag thou wander'st in his shade,
-When in eternal lines to time thou grow'st:
-  So long as men can breathe or eyes can see,
-  So long lives this, and this gives life to thee.
+  <span slot="title">Composed upon Westminster Bridge</span>
+  <span slot="author">William Wordsworth</span>
+Earth has not anything to show more fair:
+Dull would he be of soul who could pass by
+A sight so touching in its majesty:
+This City now doth, like a garment, wear
+The beauty of the morning; silent, bare,
+Ships, towers, domes, theatres, and temples lie
+Open unto the fields, and to the sky;
+All bright and glittering in the smokeless air.
+Never did sun more beautifully steep
+In his first splendour, valley, rock, or hill;
+Ne'er saw I, never felt, a calm so deep!
+The river glideth at his own sweet will:
+Dear God! the very houses seem asleep;
+And all that mighty heart is lying still!
 </poem-element>
 
 <h3>outside</h3>
 <poem-element numbers numbers-position="outside">
-Shall I compare thee to a summer's day?
-Thou art more lovely and more temperate:
-Rough winds do shake the darling buds of May,
-And summer's lease hath all too short a date;
-Sometime too hot the eye of heaven shines,
-And often is his gold complexion dimm'd;
-And every fair from fair sometime declines,
-By chance or nature's changing course untrimm'd;
-But thy eternal summer shall not fade,
-Nor lose possession of that fair thou ow'st;
-Nor shall death brag thou wander'st in his shade,
-When in eternal lines to time thou grow'st:
-  So long as men can breathe or eyes can see,
-  So long lives this, and this gives life to thee.
+  <span slot="title">Composed upon Westminster Bridge</span>
+  <span slot="author">William Wordsworth</span>
+Earth has not anything to show more fair:
+Dull would he be of soul who could pass by
+A sight so touching in its majesty:
+This City now doth, like a garment, wear
+The beauty of the morning; silent, bare,
+Ships, towers, domes, theatres, and temples lie
+Open unto the fields, and to the sky;
+All bright and glittering in the smokeless air.
+Never did sun more beautifully steep
+In his first splendour, valley, rock, or hill;
+Ne'er saw I, never felt, a calm so deep!
+The river glideth at his own sweet will:
+Dear God! the very houses seem asleep;
+And all that mighty heart is lying still!
 </poem-element>
 
-<h2>Example #6: Numbers + standard wrap (grid)</h2>
+<h2>Example #7: Numbers + standard wrap (grid)</h2>
 <h3>inside (default)</h3>
-<poem-element numbers wrap>
-Shall I compare thee to a summer's day?
-Thou art more lovely and more temperate:
-Rough winds do shake the darling buds of May,
-And summer's lease hath all too short a date;
-Sometime too hot the eye of heaven shines,
-And often is his gold complexion dimm'd;
-And every fair from fair sometime declines,
-By chance or nature's changing course untrimm'd;
-But thy eternal summer shall not fade,
-Nor lose possession of that fair thou ow'st;
-Nor shall death brag thou wander'st in his shade,
-When in eternal lines to time thou grow'st:
-  So long as men can breathe or eyes can see,
-  So long lives this, and this gives life to thee.
+<poem-element numbers wrap class="force-wrap">
+  <span slot="title">The New Colossus</span>
+  <span slot="author">Emma Lazarus</span>
+Not like the brazen giant of Greek fame,
+With conquering limbs astride from land to land;
+Here at our sea-washed, sunset gates shall stand
+A mighty woman with a torch, whose flame
+Is the imprisoned lightning, and her name
+Mother of Exiles. From her beacon-hand
+Glows world-wide welcome; her mild eyes command
+The air-bridged harbor that twin cities frame.
+"Keep, ancient lands, your storied pomp!" cries she
+With silent lips. "Give me your tired, your poor,
+Your huddled masses yearning to breathe free,
+The wretched refuse of your teeming shore.
+Send these, the homeless, tempest-tost to me,
+I lift my lamp beside the golden door!"
 </poem-element>
 
 <h3>outside</h3>
-<poem-element numbers numbers-position="outside" wrap>
-Shall I compare thee to a summer's day?
-Thou art more lovely and more temperate:
-Rough winds do shake the darling buds of May,
-And summer's lease hath all too short a date;
-Sometime too hot the eye of heaven shines,
-And often is his gold complexion dimm'd;
-And every fair from fair sometime declines,
-By chance or nature's changing course untrimm'd;
-But thy eternal summer shall not fade,
-Nor lose possession of that fair thou ow'st;
-Nor shall death brag thou wander'st in his shade,
-When in eternal lines to time thou grow'st:
-  So long as men can breathe or eyes can see,
-  So long lives this, and this gives life to thee.
+<poem-element numbers numbers-position="outside" wrap class="force-wrap">
+  <span slot="title">The New Colossus</span>
+  <span slot="author">Emma Lazarus</span>
+Not like the brazen giant of Greek fame,
+With conquering limbs astride from land to land;
+Here at our sea-washed, sunset gates shall stand
+A mighty woman with a torch, whose flame
+Is the imprisoned lightning, and her name
+Mother of Exiles. From her beacon-hand
+Glows world-wide welcome; her mild eyes command
+The air-bridged harbor that twin cities frame.
+"Keep, ancient lands, your storied pomp!" cries she
+With silent lips. "Give me your tired, your poor,
+Your huddled masses yearning to breathe free,
+The wretched refuse of your teeming shore.
+Send these, the homeless, tempest-tost to me,
+I lift my lamp beside the golden door!"
 </poem-element>
 
-<h2>Example #7: Numbers + standard wrap (list)</h2>
+<h2>Example #8: Numbers + standard wrap (list)</h2>
 <h3>inside (default)</h3>
-<poem-element numbers numbers-layout="list" wrap>
-Shall I compare thee to a summer's day?
-Thou art more lovely and more temperate:
-Rough winds do shake the darling buds of May,
-And summer's lease hath all too short a date;
-Sometime too hot the eye of heaven shines,
-And often is his gold complexion dimm'd;
-And every fair from fair sometime declines,
-By chance or nature's changing course untrimm'd;
-But thy eternal summer shall not fade,
-Nor lose possession of that fair thou ow'st;
-Nor shall death brag thou wander'st in his shade,
-When in eternal lines to time thou grow'st:
-  So long as men can breathe or eyes can see,
-  So long lives this, and this gives life to thee.
+<poem-element numbers numbers-layout="list" wrap class="force-wrap">
+  <span slot="title">Leda and the Swan</span>
+  <span slot="author">William Butler Yeats</span>
+A sudden blow: the great wings beating still
+Above the staggering girl, her thighs caressed
+By the dark webs, her nape caught in his bill,
+He holds her helpless breast upon his breast.
+How can those terrified vague fingers push
+The feathered glory from her loosening thighs?
+And how can body, laid in that white rush,
+But feel the strange heart beating where it lies?
+A shudder in the loins engenders there
+The broken wall, the burning roof and tower
+And Agamemnon dead.
+                    Being so caught up,
+So mastered by the brute blood of the air,
+Did she put on his knowledge with his power
+Before the indifferent beak could let her drop?
 </poem-element>
 
 <h3>outside</h3>
-<poem-element numbers numbers-layout="list" numbers-position="outside" wrap>
-Shall I compare thee to a summer's day?
-Thou art more lovely and more temperate:
-Rough winds do shake the darling buds of May,
-And summer's lease hath all too short a date;
-Sometime too hot the eye of heaven shines,
-And often is his gold complexion dimm'd;
-And every fair from fair sometime declines,
-By chance or nature's changing course untrimm'd;
-But thy eternal summer shall not fade,
-Nor lose possession of that fair thou ow'st;
-Nor shall death brag thou wander'st in his shade,
-When in eternal lines to time thou grow'st:
-  So long as men can breathe or eyes can see,
-  So long lives this, and this gives life to thee.
+<poem-element numbers numbers-layout="list" numbers-position="outside" wrap class="force-wrap">
+  <span slot="title">Leda and the Swan</span>
+  <span slot="author">William Butler Yeats</span>
+A sudden blow: the great wings beating still
+Above the staggering girl, her thighs caressed
+By the dark webs, her nape caught in his bill,
+He holds her helpless breast upon his breast.
+How can those terrified vague fingers push
+The feathered glory from her loosening thighs?
+And how can body, laid in that white rush,
+But feel the strange heart beating where it lies?
+A shudder in the loins engenders there
+The broken wall, the burning roof and tower
+And Agamemnon dead.
+                    Being so caught up,
+So mastered by the brute blood of the air,
+Did she put on his knowledge with his power
+Before the indifferent beak could let her drop?
 </poem-element>
 
-<h2>Example #8: Numbers + indent wrap (grid)</h2>
+<h2>Example #9: Numbers + indent wrap (grid)</h2>
 <h3>inside (default)</h3>
-<poem-element numbers wrap="indent">
-Shall I compare thee to a summer's day?
-Thou art more lovely and more temperate:
-Rough winds do shake the darling buds of May,
-And summer's lease hath all too short a date;
-Sometime too hot the eye of heaven shines,
-And often is his gold complexion dimm'd;
-And every fair from fair sometime declines,
-By chance or nature's changing course untrimm'd;
-But thy eternal summer shall not fade,
-Nor lose possession of that fair thou ow'st;
-Nor shall death brag thou wander'st in his shade,
-When in eternal lines to time thou grow'st:
-  So long as men can breathe or eyes can see,
-  So long lives this, and this gives life to thee.
+<poem-element numbers wrap="indent" class="force-wrap">
+  <span slot="title">Design</span>
+  <span slot="author">Robert Frost</span>
+I found a dimpled spider, fat and white,
+On a white heal-all, holding up a moth
+Like a white piece of rigid satin cloth—
+Assorted characters of death and blight
+Mixed ready to begin the morning right,
+Like the ingredients of a witches' broth—
+A snow-drop spider, a flower like a froth,
+And dead wings carried like a paper kite.
+What had that flower to do with being white,
+The wayside blue and innocent heal-all?
+What brought the kindred spider to that height,
+Then steered the white moth thither in the night?
+What but design of darkness to appall?—
+If design govern in a thing so small.
 </poem-element>
 
 <h3>outside</h3>
-<poem-element numbers numbers-position="outside" wrap="indent">
-Shall I compare thee to a summer's day?
-Thou art more lovely and more temperate:
-Rough winds do shake the darling buds of May,
-And summer's lease hath all too short a date;
-Sometime too hot the eye of heaven shines,
-And often is his gold complexion dimm'd;
-And every fair from fair sometime declines,
-By chance or nature's changing course untrimm'd;
-But thy eternal summer shall not fade,
-Nor lose possession of that fair thou ow'st;
-Nor shall death brag thou wander'st in his shade,
-When in eternal lines to time thou grow'st:
-  So long as men can breathe or eyes can see,
-  So long lives this, and this gives life to thee.
+<poem-element numbers numbers-position="outside" wrap="indent" class="force-wrap">
+  <span slot="title">Design</span>
+  <span slot="author">Robert Frost</span>
+I found a dimpled spider, fat and white,
+On a white heal-all, holding up a moth
+Like a white piece of rigid satin cloth—
+Assorted characters of death and blight
+Mixed ready to begin the morning right,
+Like the ingredients of a witches' broth—
+A snow-drop spider, a flower like a froth,
+And dead wings carried like a paper kite.
+What had that flower to do with being white,
+The wayside blue and innocent heal-all?
+What brought the kindred spider to that height,
+Then steered the white moth thither in the night?
+What but design of darkness to appall?—
+If design govern in a thing so small.
 </poem-element>
 
-<h2>Example #9: Numbers + indent wrap (list)</h2>
+<h2>Example #10: Numbers + indent wrap (list)</h2>
 <h3>inside (default)</h3>
-<poem-element numbers numbers-layout="list" wrap="indent">
-Shall I compare thee to a summer's day?
-Thou art more lovely and more temperate:
-Rough winds do shake the darling buds of May,
-And summer's lease hath all too short a date;
-Sometime too hot the eye of heaven shines,
-And often is his gold complexion dimm'd;
-And every fair from fair sometime declines,
-By chance or nature's changing course untrimm'd;
-But thy eternal summer shall not fade,
-Nor lose possession of that fair thou ow'st;
-Nor shall death brag thou wander'st in his shade,
-When in eternal lines to time thou grow'st:
-  So long as men can breathe or eyes can see,
-  So long lives this, and this gives life to thee.
+<poem-element numbers numbers-layout="list" wrap="indent" class="force-wrap">
+  <span slot="title">Sonnet 29</span>
+  <span slot="author">Edna St. Vincent Millay</span>
+Pity me not because the light of day
+At close of day no longer walks the sky;
+Pity me not for beauties passed away
+From field and thicket as the year goes by;
+Pity me not the waning of the moon,
+Nor that the ebbing tide goes out to sea,
+Nor that a man's desire is hushed so soon,
+And you no longer look with love on me.
+This have I known always: Love is no more
+Than the wide blossom which the wind assails,
+Than the great tide that treads the shifting shore,
+Strewing fresh wreckage gathered in the gales:
+Pity me that the heart is slow to learn
+What the swift mind beholds at every turn.
 </poem-element>
 
 <h3>outside</h3>
-<poem-element numbers numbers-layout="list" numbers-position="outside" wrap="indent">
-Shall I compare thee to a summer's day?
-Thou art more lovely and more temperate:
-Rough winds do shake the darling buds of May,
-And summer's lease hath all too short a date;
-Sometime too hot the eye of heaven shines,
-And often is his gold complexion dimm'd;
-And every fair from fair sometime declines,
-By chance or nature's changing course untrimm'd;
-But thy eternal summer shall not fade,
-Nor lose possession of that fair thou ow'st;
-Nor shall death brag thou wander'st in his shade,
-When in eternal lines to time thou grow'st:
-  So long as men can breathe or eyes can see,
-  So long lives this, and this gives life to thee.
+<poem-element numbers numbers-layout="list" numbers-position="outside" wrap="indent" class="force-wrap">
+  <span slot="title">Sonnet 29</span>
+  <span slot="author">Edna St. Vincent Millay</span>
+Pity me not because the light of day
+At close of day no longer walks the sky;
+Pity me not for beauties passed away
+From field and thicket as the year goes by;
+Pity me not the waning of the moon,
+Nor that the ebbing tide goes out to sea,
+Nor that a man's desire is hushed so soon,
+And you no longer look with love on me.
+This have I known always: Love is no more
+Than the wide blossom which the wind assails,
+Than the great tide that treads the shifting shore,
+Strewing fresh wreckage gathered in the gales:
+Pity me that the heart is slow to learn
+What the swift mind beholds at every turn.
 </poem-element>
 
-<h2>Example #10: Numbers + indent-arrow wrap (grid)</h2>
+<h2>Example #11: Numbers + indent-arrow wrap (grid)</h2>
 <h3>inside (default)</h3>
-<poem-element numbers wrap="indent-arrow">
-Shall I compare thee to a summer's day?
-Thou art more lovely and more temperate:
-Rough winds do shake the darling buds of May,
-And summer's lease hath all too short a date;
-Sometime too hot the eye of heaven shines,
-And often is his gold complexion dimm'd;
-And every fair from fair sometime declines,
-By chance or nature's changing course untrimm'd;
-But thy eternal summer shall not fade,
-Nor lose possession of that fair thou ow'st;
-Nor shall death brag thou wander'st in his shade,
-When in eternal lines to time thou grow'st:
-  So long as men can breathe or eyes can see,
-  So long lives this, and this gives life to thee.
+<poem-element numbers wrap="indent-arrow" class="force-wrap">
+  <span slot="title">God's Grandeur</span>
+  <span slot="author">Gerard Manley Hopkins</span>
+The world is charged with the grandeur of God.
+It will flame out, like shining from shook foil;
+It gathers to a greatness, like the ooze of oil
+Crushed. Why do men then now not reck his rod?
+Generations have trod, have trod, have trod;
+And all is seared with trade; bleared, smeared with toil;
+And wears man's smudge and shares man's smell: the soil
+Is bare now, nor can foot feel, being shod.
+And for all this, nature is never spent;
+There lives the dearest freshness deep down things;
+And though the last lights off the black West went
+Oh, morning, at the brown brink eastward, springs—
+Because the Holy Ghost over the bent
+World broods with warm breast and with ah! bright wings.
 </poem-element>
 
 <h3>outside</h3>
-<poem-element numbers numbers-position="outside" wrap="indent-arrow">
-Shall I compare thee to a summer's day?
-Thou art more lovely and more temperate:
-Rough winds do shake the darling buds of May,
-And summer's lease hath all too short a date;
-Sometime too hot the eye of heaven shines,
-And often is his gold complexion dimm'd;
-And every fair from fair sometime declines,
-By chance or nature's changing course untrimm'd;
-But thy eternal summer shall not fade,
-Nor lose possession of that fair thou ow'st;
-Nor shall death brag thou wander'st in his shade,
-When in eternal lines to time thou grow'st:
-  So long as men can breathe or eyes can see,
-  So long lives this, and this gives life to thee.
+<poem-element numbers numbers-position="outside" wrap="indent-arrow" class="force-wrap">
+  <span slot="title">God's Grandeur</span>
+  <span slot="author">Gerard Manley Hopkins</span>
+The world is charged with the grandeur of God.
+It will flame out, like shining from shook foil;
+It gathers to a greatness, like the ooze of oil
+Crushed. Why do men then now not reck his rod?
+Generations have trod, have trod, have trod;
+And all is seared with trade; bleared, smeared with toil;
+And wears man's smudge and shares man's smell: the soil
+Is bare now, nor can foot feel, being shod.
+And for all this, nature is never spent;
+There lives the dearest freshness deep down things;
+And though the last lights off the black West went
+Oh, morning, at the brown brink eastward, springs—
+Because the Holy Ghost over the bent
+World broods with warm breast and with ah! bright wings.
 </poem-element>
 
-<h2>Example #11: Numbers + indent-arrow wrap (list)</h2>
+<h2>Example #12: Numbers + indent-arrow wrap (list)</h2>
 <h3>inside (default)</h3>
-<poem-element numbers numbers-layout="list" wrap="indent-arrow">
-Shall I compare thee to a summer's day?
-Thou art more lovely and more temperate:
-Rough winds do shake the darling buds of May,
-And summer's lease hath all too short a date;
-Sometime too hot the eye of heaven shines,
-And often is his gold complexion dimm'd;
-And every fair from fair sometime declines,
-By chance or nature's changing course untrimm'd;
-But thy eternal summer shall not fade,
-Nor lose possession of that fair thou ow'st;
-Nor shall death brag thou wander'st in his shade,
-When in eternal lines to time thou grow'st:
-  So long as men can breathe or eyes can see,
-  So long lives this, and this gives life to thee.
+<poem-element numbers numbers-layout="list" wrap="indent-arrow" class="force-wrap">
+  <span slot="title">If We Must Die</span>
+  <span slot="author">Claude McKay</span>
+If we must die, let it not be like hogs
+Hunted and penned in an inglorious spot,
+While round us bark the mad and hungry dogs,
+Making their mock at our accursed lot.
+If we must die, O let us nobly die,
+So that our precious blood may not be shed
+In vain; then even the monsters we defy
+Shall be constrained to honor us though dead!
+O kinsmen! we must meet the common foe!
+Though far outnumbered let us show us brave,
+And for their thousand blows deal one death-blow!
+What though before us lies the open grave?
+Like men we'll face the murderous, cowardly pack,
+Pressed to the wall, dying, but fighting back!
 </poem-element>
 
 <h3>outside</h3>
-<poem-element numbers numbers-layout="list" numbers-position="outside" wrap="indent-arrow">
-Shall I compare thee to a summer's day?
-Thou art more lovely and more temperate:
-Rough winds do shake the darling buds of May,
-And summer's lease hath all too short a date;
-Sometime too hot the eye of heaven shines,
-And often is his gold complexion dimm'd;
-And every fair from fair sometime declines,
-By chance or nature's changing course untrimm'd;
-But thy eternal summer shall not fade,
-Nor lose possession of that fair thou ow'st;
-Nor shall death brag thou wander'st in his shade,
-When in eternal lines to time thou grow'st:
-  So long as men can breathe or eyes can see,
-  So long lives this, and this gives life to thee.
+<poem-element numbers numbers-layout="list" numbers-position="outside" wrap="indent-arrow" class="force-wrap">
+  <span slot="title">If We Must Die</span>
+  <span slot="author">Claude McKay</span>
+If we must die, let it not be like hogs
+Hunted and penned in an inglorious spot,
+While round us bark the mad and hungry dogs,
+Making their mock at our accursed lot.
+If we must die, O let us nobly die,
+So that our precious blood may not be shed
+In vain; then even the monsters we defy
+Shall be constrained to honor us though dead!
+O kinsmen! we must meet the common foe!
+Though far outnumbered let us show us brave,
+And for their thousand blows deal one death-blow!
+What though before us lies the open grave?
+Like men we'll face the murderous, cowardly pack,
+Pressed to the wall, dying, but fighting back!
 </poem-element>
 
 <h2>Numbered list for comparison</h2>

@@ -92,21 +92,25 @@ export const STATIC_CSS = `
         display: block;
         width: 100%;
         box-sizing: border-box;
-        --poem-num-col: 40px;
+        --poem-num-col: 3ch;
         --poem-num-gap: 0.5rem;
         --poem-num-gutter: calc(var(--poem-num-col) + var(--poem-num-gap));
         --poem-line-number-color: inherit;
         --poem-line-number-font: inherit;
-        --poem-line-number-font-size: 1em;
-        --poem-line-number-font-weight: normal;
+        --poem-line-number-font-size: inherit;
+        --poem-line-number-font-weight: inherit;
         --poem-text-indent: 2em;
+      }
+      slot[name="title"],
+      slot[name="author"] {
+        display: block;
       }
       [part="block"] {
         margin: 0;
         padding: 0;
         font-family: inherit;
         font-size: inherit;
-        line-height: 1.5;
+        line-height: inherit;
         width: 100%;
         box-sizing: border-box;
         contain: layout style;
@@ -133,19 +137,15 @@ export const STATIC_CSS = `
         text-indent: calc(-1 * var(--poem-text-indent, 2em));
         margin-left: var(--poem-text-indent, 2em);
       }
-      /* Wrap + indent-arrow: arrow pseudo-element */
+      /* Wrap + indent-arrow: continuation arrow via background */
       :host([wrap="indent-arrow"]) [part="line"] {
-        position: relative;
-      }
-      :host([wrap="indent-arrow"]) [part="line"]::after {
-        content: "\\21AA";
-        position: absolute;
-        left: calc(var(--poem-text-indent, 2em) / 2);
-        top: 2.5em;
-        color: #888;
-        font-size: 0.8em;
-        line-height: 1;
-        pointer-events: none;
+        padding-left: 1em;
+        text-indent: calc(-1 * (var(--poem-text-indent, 2em) + 1em));
+        margin-left: calc(var(--poem-text-indent, 2em) + 1em);
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16'%3E%3Ctext x='0' y='14' font-size='16' fill='%23888'%3E%E2%86%AA%3C/text%3E%3C/svg%3E");
+        background-repeat: no-repeat;
+        background-size: 0.8em 0.8em;
+        background-position: 0 calc(1lh + (1lh - 1em) / 2);
       }
       /* Numbers (list layout): inside positioning — pad block so markers sit within content flow */
       :host([numbers][numbers-layout="list"]:not([numbers-position="outside"])) [part="block"] {
@@ -158,9 +158,11 @@ export const STATIC_CSS = `
         padding-left: var(--poem-text-indent, 2em);
         text-indent: calc(-1 * var(--poem-text-indent, 2em));
       }
-      /* Numbers (list layout) + indent-arrow: arrow offset for marker gutter */
-      :host([numbers][numbers-layout="list"][wrap="indent-arrow"]) [part="line"]::after {
-        left: calc(var(--poem-num-gutter) + var(--poem-num-gap) + (var(--poem-text-indent, 2em) / 2) - 2em);
+      /* Numbers (list layout) + indent-arrow: arrow in padding area */
+      :host([numbers][numbers-layout="list"][wrap="indent-arrow"]) [part="line"] {
+        padding-left: calc(var(--poem-text-indent, 2em) + 1em);
+        text-indent: calc(-1 * (var(--poem-text-indent, 2em) + 1em));
+        background-position: var(--poem-text-indent, 2em) calc(1lh + (1lh - 1em) / 2);
       }
       /* Grid numbers + wrap (interleaved grid, default) */
       :host([numbers][wrap]:not([numbers-layout="list"])) [part="block"] {
@@ -171,6 +173,13 @@ export const STATIC_CSS = `
       :host([numbers][wrap]:not([numbers-layout="list"])) [part="line"] {
         display: block;
         min-width: 0;
+      }
+      /* Grid numbers + indent-arrow: reset to grid cell geometry */
+      :host([numbers][wrap="indent-arrow"]:not([numbers-layout="list"])) [part="line"] {
+        padding-left: 1em;
+        margin-left: var(--poem-text-indent, 2em);
+        text-indent: calc(-1 * (var(--poem-text-indent, 2em) + 1em));
+        background-position: 0 calc(1lh + (1lh - 1em) / 2);
       }
       /* Grid numbers + wrap: outside positioning */
       :host([numbers][numbers-position="outside"][wrap]:not([numbers-layout="list"])) [part="block"] {
@@ -189,9 +198,8 @@ export const STATIC_CSS = `
       [part="line-numbers"] {
         flex-shrink: 0;
         width: var(--poem-num-col);
-        margin: 0;
+        margin: 0 var(--poem-num-gap) 0 0;
         padding: 0;
-        margin-right: var(--poem-num-gap);
         white-space: pre;
         line-height: inherit;
       }
@@ -209,7 +217,7 @@ export const STATIC_CSS = `
         color: var(--poem-line-number-color, inherit);
         font-family: var(--poem-line-number-font, inherit);
         font-size: var(--poem-line-number-font-size, 1em);
-        font-weight: var(--poem-line-number-font-weight, normal);
+        font-weight: var(--poem-line-number-font-weight, inherit);
         font-variant-numeric: lining-nums;
         user-select: none;
         -webkit-user-select: none;
@@ -239,7 +247,7 @@ export function generateDynamicCSS(numberInterval) {
         color: var(--poem-line-number-color, inherit);
         font-family: var(--poem-line-number-font, inherit);
         font-size: var(--poem-line-number-font-size, 1em);
-        font-weight: var(--poem-line-number-font-weight, normal);
+        font-weight: var(--poem-line-number-font-weight, inherit);
         font-variant-numeric: tabular-nums lining-nums;
       }`;
 }

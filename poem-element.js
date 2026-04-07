@@ -46,7 +46,13 @@ class PoemElement extends HTMLElement {
   }
 
   render() {
-    const raw = this.textContent;
+    // Get poem text from child nodes, excluding slotted elements
+    let raw = '';
+    for (const node of this.childNodes) {
+      if (node.nodeType === Node.TEXT_NODE) {
+        raw += node.textContent;
+      }
+    }
     const lines = parseLines(raw);
 
     if (!this.shadowRoot) {
@@ -145,6 +151,15 @@ class PoemElement extends HTMLElement {
     if (styleEl && shadow.adoptedStyleSheets === undefined) {
       shadow.appendChild(styleEl);
     }
+
+    // Add title and author slots before the poem block
+    const titleSlot = document.createElement('slot');
+    titleSlot.name = 'title';
+    frag.insertBefore(titleSlot, frag.firstChild);
+
+    const authorSlot = document.createElement('slot');
+    authorSlot.name = 'author';
+    titleSlot.after(authorSlot);
 
     // Single append for all new content
     shadow.appendChild(frag);

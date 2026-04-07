@@ -21,7 +21,6 @@ export function parseAttributes(attrs) {
   const numbersLayout = attrs['numbers-layout'] || 'grid';
   const useListNumbers = hasNumbers && hasWrap && numbersLayout === 'list';
   const useGridNumbers = hasNumbers && !useListNumbers;
-  const useGridSplit = useGridNumbers && !hasWrap;
   const numbersOutside = attrs['numbers-position'] === 'outside';
   const ariaLabel = attrs['aria-label'] || 'poem';
 
@@ -32,7 +31,6 @@ export function parseAttributes(attrs) {
     numbersLayout,
     useListNumbers,
     useGridNumbers,
-    useGridSplit,
     numbersOutside,
     ariaLabel,
   };
@@ -99,6 +97,7 @@ export const STATIC_CSS = `
         --poem-line-number-font: inherit;
         --poem-line-number-font-size: inherit;
         --poem-line-number-font-weight: inherit;
+        --poem-line-number-line-height: inherit;
         --poem-text-indent: 2em;
       }
       slot[name="title"],
@@ -164,57 +163,30 @@ export const STATIC_CSS = `
         text-indent: calc(-1 * (var(--poem-text-indent, 2em) + 1em));
         background-position: var(--poem-text-indent, 2em) calc(1lh + (1lh - 1em) / 2);
       }
-      /* Grid numbers + wrap (interleaved grid, default) */
-      :host([numbers][wrap]:not([numbers-layout="list"])) [part="block"] {
+      /* Grid numbers (interleaved grid, default) */
+      :host([numbers]:not([numbers-layout="list"])) [part="block"] {
         display: grid;
         grid-template-columns: var(--poem-num-col) 1fr;
         column-gap: var(--poem-num-gap);
+        align-items: first baseline;
       }
-      :host([numbers][wrap]:not([numbers-layout="list"])) [part="line"] {
+      :host([numbers]:not([numbers-layout="list"])) [part="line"] {
         display: block;
         min-width: 0;
       }
-      /* Grid numbers + indent-arrow: reset to grid cell geometry */
+      /* Grid numbers + indent-arrow: restore margin to indent only (grid handles number column) */
       :host([numbers][wrap="indent-arrow"]:not([numbers-layout="list"])) [part="line"] {
-        padding-left: 1em;
         margin-left: var(--poem-text-indent, 2em);
-        text-indent: calc(-1 * (var(--poem-text-indent, 2em) + 1em));
-        background-position: 0 calc(1lh + (1lh - 1em) / 2);
       }
-      /* Grid numbers + wrap: outside positioning */
-      :host([numbers][numbers-position="outside"][wrap]:not([numbers-layout="list"])) [part="block"] {
+      /* Grid numbers: outside positioning */
+      :host([numbers][numbers-position="outside"]:not([numbers-layout="list"])) [part="block"] {
         margin-left: calc(-1 * var(--poem-num-gutter));
         width: calc(100% + var(--poem-num-gutter));
       }
-      /* Grid number layout: no-wrap (two-column with separate scroll) */
-      .poem-grid-outer {
-        display: flex;
-        align-items: flex-start;
-      }
-      .poem-grid-outer.poem-numbers-outside {
-        margin-left: calc(-1 * var(--poem-num-gutter));
-        width: calc(100% + var(--poem-num-gutter));
-      }
-      [part="line-numbers"] {
-        flex-shrink: 0;
-        width: var(--poem-num-col);
-        margin: 0 var(--poem-num-gap) 0 0;
-        padding: 0;
-        white-space: pre;
-        line-height: inherit;
-      }
-      [part="line-numbers"] span {
-        display: block;
-      }
-      .poem-grid-outer [part="block"] {
-        flex: 1;
-        min-width: 0;
-      }
-      /* Shared number styles (grid layout DOM elements) */
-      [part="line-number"],
-      [part="line-numbers"] {
+      /* Number styles (grid layout DOM elements) */
+      [part="line-number"] {
         text-align: right;
-        line-height: inherit;
+        line-height: var(--poem-line-number-line-height, inherit);
         color: var(--poem-line-number-color, inherit);
         font-family: var(--poem-line-number-font, inherit);
         font-size: var(--poem-line-number-font-size, 1em);

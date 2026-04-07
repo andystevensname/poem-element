@@ -57,29 +57,16 @@ export function renderPoemElement(poemText, attrs = {}) {
   shadowHTML += `<slot name="title"></slot><slot name="author"></slot>`;
 
   const tabindexAttr = config.hasWrap ? '' : ' tabindex="0"';
-  let numbersHTML = '';
   let linesHTML = '';
   lines.forEach((line, i) => {
     if (config.useGridNumbers) {
       const num = escapeHTML(formatLineNumber(i, config.numberInterval));
-      if (config.useGridSplit) {
-        numbersHTML += `<span>${num}</span>`;
-      } else {
-        linesHTML += `<span part="line-number" aria-hidden="true">${num}</span>`;
-      }
+      linesHTML += `<span part="line-number" aria-hidden="true">${num}</span>`;
     }
     linesHTML += `<span part="line" role="none">${escapeHTML(transformLineText(line, config))}</span>`;
   });
 
-  if (config.useGridSplit) {
-    const outerClass = 'poem-grid-outer' + (config.numbersOutside ? ' poem-numbers-outside' : '');
-    shadowHTML += `<div class="${outerClass}">`;
-    shadowHTML += `<div part="line-numbers" aria-hidden="true">${numbersHTML}</div>`;
-    shadowHTML += `<pre part="block" role="group" aria-label="${escapeHTML(config.ariaLabel)}"${tabindexAttr}>${linesHTML}</pre>`;
-    shadowHTML += `</div>`;
-  } else {
-    shadowHTML += `<pre part="block" role="group" aria-label="${escapeHTML(config.ariaLabel)}"${tabindexAttr}>${linesHTML}</pre>`;
-  }
+  shadowHTML += `<pre part="block" role="group" aria-label="${escapeHTML(config.ariaLabel)}"${tabindexAttr}>${linesHTML}</pre>`;
 
   // Raw poem text preserved in light DOM as fallback
   const lightDOM = escapeHTML(poemText);

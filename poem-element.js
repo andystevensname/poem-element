@@ -108,24 +108,13 @@ class PoemElement extends HTMLElement {
       container.setAttribute('tabindex', '0');
     }
 
-    let numbersCol;
-    if (config.useGridSplit) {
-      numbersCol = document.createElement('div');
-      numbersCol.setAttribute('part', 'line-numbers');
-      numbersCol.setAttribute('aria-hidden', 'true');
-    }
-
     lines.forEach((line, i) => {
       if (config.useGridNumbers) {
         const numSpan = document.createElement('span');
+        numSpan.setAttribute('part', 'line-number');
+        numSpan.setAttribute('aria-hidden', 'true');
         numSpan.textContent = formatLineNumber(i, config.numberInterval);
-        if (config.useGridSplit) {
-          numbersCol.appendChild(numSpan);
-        } else {
-          numSpan.setAttribute('part', 'line-number');
-          numSpan.setAttribute('aria-hidden', 'true');
-          container.appendChild(numSpan);
-        }
+        container.appendChild(numSpan);
       }
 
       const lineSpan = document.createElement('span');
@@ -135,15 +124,7 @@ class PoemElement extends HTMLElement {
       container.appendChild(lineSpan);
     });
 
-    if (config.useGridSplit) {
-      const outer = document.createElement('div');
-      outer.className = 'poem-grid-outer' + (config.numbersOutside ? ' poem-numbers-outside' : '');
-      outer.appendChild(numbersCol);
-      outer.appendChild(container);
-      frag.appendChild(outer);
-    } else {
-      frag.appendChild(container);
-    }
+    frag.appendChild(container);
 
     // Remove old content (but preserve <style> for fallback path)
     const styleEl = shadow.querySelector('style');

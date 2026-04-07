@@ -5,7 +5,7 @@ const dynamicSheetCache = new Map();
 
 class PoemElement extends HTMLElement {
   static get observedAttributes() {
-    return ['numbers', 'wrap', 'numbers-layout', 'numbers-position', 'aria-label'];
+    return ['numbers', 'wrap', 'numbers-layout', 'numbers-position', 'numbers-align', 'aria-label'];
   }
 
   #renderPending = false;

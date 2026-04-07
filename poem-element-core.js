@@ -178,10 +178,25 @@ export const STATIC_CSS = `
       :host([numbers][wrap="indent-arrow"]:not([numbers-layout="list"])) [part="line"] {
         margin-left: var(--poem-text-indent, 2em);
       }
+      /* Grid numbers: right-aligned */
+      :host([numbers][numbers-align="right"]:not([numbers-layout="list"])) [part="block"] {
+        grid-template-columns: 1fr var(--poem-num-col);
+      }
+      :host([numbers][numbers-align="right"]:not([numbers-layout="list"])) [part="line-number"] {
+        grid-column: 2;
+      }
+      :host([numbers][numbers-align="right"]:not([numbers-layout="list"])) [part="line"] {
+        grid-column: 1;
+      }
       /* Grid numbers: outside positioning */
       :host([numbers][numbers-position="outside"]:not([numbers-layout="list"])) [part="block"] {
         margin-left: calc(-1 * var(--poem-num-gutter));
         width: calc(100% + var(--poem-num-gutter));
+      }
+      /* Grid numbers: outside + right positioning */
+      :host([numbers][numbers-position="outside"][numbers-align="right"]:not([numbers-layout="list"])) [part="block"] {
+        margin-left: 0;
+        margin-right: calc(-1 * var(--poem-num-gutter));
       }
       /* Number styles (grid layout DOM elements) */
       [part="line-number"] {
@@ -195,6 +210,9 @@ export const STATIC_CSS = `
         user-select: none;
         -webkit-user-select: none;
         pointer-events: none;
+      }
+      :host([numbers-align="right"]) [part="line-number"] {
+        text-align: left;
       }
       /* Print: force wrap and remove overflow clipping */
       @media print {

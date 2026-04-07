@@ -181,6 +181,7 @@ export const STATIC_CSS = `
       /* Grid numbers: right-aligned */
       :host([numbers][numbers-align="right"]:not([numbers-layout="list"])) [part="block"] {
         grid-template-columns: 1fr var(--poem-num-col);
+        grid-auto-flow: dense;
       }
       :host([numbers][numbers-align="right"]:not([numbers-layout="list"])) [part="line-number"] {
         grid-column: 2;

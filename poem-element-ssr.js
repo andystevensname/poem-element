@@ -26,6 +26,7 @@ export function renderPoemElement(poemText, attrs = {}) {
     wrap: attrs.wrap === true ? '' : (attrs.wrap ?? null),
     'numbers-layout': attrs['numbers-layout'] ?? null,
     'numbers-position': attrs['numbers-position'] ?? null,
+    'numbers-align': attrs['numbers-align'] ?? null,
     'aria-label': attrs['aria-label'] ?? null,
   };
 
@@ -46,6 +47,9 @@ export function renderPoemElement(poemText, attrs = {}) {
   }
   if (normalized['numbers-position']) {
     outerAttrs.push(`numbers-position="${escapeHTML(normalized['numbers-position'])}"`);
+  }
+  if (normalized['numbers-align']) {
+    outerAttrs.push(`numbers-align="${escapeHTML(normalized['numbers-align'])}"`);
   }
   if (normalized['aria-label']) {
     outerAttrs.push(`aria-label="${escapeHTML(normalized['aria-label'])}"`);

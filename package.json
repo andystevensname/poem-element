@@ -1,6 +1,6 @@
 {
   "name": "poem-element",
-  "version": "2.4.0",
+  "version": "2.5.0",
   "description": "A web component for displaying poetry with advanced formatting and line numbering.",
   "main": "poem-element.js",
   "module": "poem-element.js",

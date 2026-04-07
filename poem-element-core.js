@@ -214,6 +214,7 @@ export const STATIC_CSS = `
       [part="line-number"],
       [part="line-numbers"] {
         text-align: right;
+        line-height: inherit;
         color: var(--poem-line-number-color, inherit);
         font-family: var(--poem-line-number-font, inherit);
         font-size: var(--poem-line-number-font-size, 1em);

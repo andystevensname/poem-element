@@ -10,6 +10,13 @@
     "./ssr": "./poem-element-ssr.js",
     "./core": "./poem-element-core.js"
   },
+  "files": [
+    "poem-element.js",
+    "poem-element-ssr.js",
+    "poem-element-core.js",
+    "README.md",
+    "LICENSE"
+  ],
   "scripts": {
     "serve": "npx serve ."
   },

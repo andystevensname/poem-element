@@ -1,6 +1,6 @@
 {
   "name": "poem-element",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "A web component for displaying poetry with advanced formatting and line numbering.",
   "main": "poem-element.js",
   "module": "poem-element.js",
@@ -20,7 +20,12 @@
   "scripts": {
     "serve": "npx serve ."
   },
-  "keywords": ["web component", "poetry", "custom element", "line numbering"],
+  "keywords": [
+    "web component",
+    "poetry",
+    "custom element",
+    "line numbering"
+  ],
   "author": "Andy Stevens",
   "license": "MIT",
   "repository": {

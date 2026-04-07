@@ -88,7 +88,7 @@ export function formatLineNumber(index, interval) {
 export const STATIC_CSS = `
       :host {
         display: block;
-        width: 100%;
+        width: fit-content;
         box-sizing: border-box;
         --poem-num-col: 3ch;
         --poem-num-gap: 0.5rem;

@@ -104,6 +104,11 @@ Thou art more lovely and more temperate:
 <poem-element numbers numbers-position="outside" wrap="indent">
 ...
 </poem-element>
+
+<!-- Numbers on the right side (grid layout only) -->
+<poem-element numbers numbers-align="right">
+...
+</poem-element>
 ```
 
 ### Accessibility
@@ -144,6 +149,7 @@ Then open `index.html` in your browser.
 | `numbers` | (boolean), or a positive integer | 5 | Enables line numbering. Adding this attribute without a value creates line numbers every 5th line. A number sets the interval. |
 | `numbers-layout` | `"grid"`, `"list"` | `"grid"` | `grid` uses CSS Grid with DOM elements for numbers. `list` uses `display: list-item` with `::marker` for numbers (only effective with `wrap`; silently ignored without it). |
 | `numbers-position` | `"inside"`, `"outside"` | `"inside"` | `inside` positions numbers flush with surrounding content. `outside` hangs numbers in the left margin. |
+| `numbers-align` | `"right"` | left | Places line numbers to the right of the poem text. Only applies to grid layout. |
 | `aria-label` | any string | `"poem"` | Accessible label for the poem container. Forwarded to the inner `role="group"` element. |
 
 ### Properties
@@ -186,14 +192,9 @@ poem-element::part(line) {
   color: #333;
 }
 
-/* Style line numbers (grid interleaved layout) */
+/* Style line numbers (grid layout) */
 poem-element::part(line-number) {
   color: #c00;
-}
-
-/* Style the line numbers column (grid split layout) */
-poem-element::part(line-numbers) {
-  color: #999;
 }
 ```
 
@@ -204,15 +205,16 @@ These properties control values that can't be styled through `::part()` — eith
 ```css
 poem-element {
   /* Layout calc values */
-  --poem-num-col: 40px;        /* Width of the line number column */
+  --poem-num-col: 3ch;         /* Width of the line number column */
   --poem-num-gap: 0.5rem;      /* Gap between numbers and text */
   --poem-text-indent: 2em;     /* Hanging indent depth for wrap="indent" */
 
   /* ::marker styling (not reachable via ::part) */
   --poem-line-number-color: inherit;
   --poem-line-number-font: inherit;
-  --poem-line-number-font-size: 1em;
-  --poem-line-number-font-weight: normal;
+  --poem-line-number-font-size: inherit;
+  --poem-line-number-font-weight: inherit;
+  --poem-line-number-line-height: inherit; /* Adjust when line number font-size differs from text */
 }
 ```
 

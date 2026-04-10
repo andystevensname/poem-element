@@ -1,6 +1,10 @@
 {
-  "name": "poem-element",
-  "version": "2.5.3",
+  "name": "@andystevensname/poem-element",
+    "publishConfig": {
+      "access": "public",
+      "registry": "https://registry.npmjs.org/"
+    },
+  "version": "1.0.0",
   "description": "A web component for displaying poetry with advanced formatting and line numbering.",
   "main": "poem-element.js",
   "module": "poem-element.js",

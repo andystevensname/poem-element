@@ -4,7 +4,7 @@
     "access": "public",
     "registry": "https://registry.npmjs.org/"
   },
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "A web component for displaying poetry with advanced formatting and line numbering.",
   "main": "poem-element.js",
   "module": "poem-element.js",
